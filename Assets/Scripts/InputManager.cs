@@ -1,8 +1,4 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.InputSystem;
-
 
 public class InputManager : MonoBehaviour
 {
@@ -11,20 +7,22 @@ public class InputManager : MonoBehaviour
     private PlayerMotor motor;
     private PlayerLook look;
 
-    void Awake()
+    // Expose OnFoot so other scripts can access it
+    public PlayerInput.OnFootActions OnFoot => onFoot;
+
+    private void Awake()
     {
         playerInput = new PlayerInput();
         onFoot = playerInput.OnFoot;
         motor = GetComponent<PlayerMotor>();
         look = GetComponent<PlayerLook>();
+
         onFoot.Jump.performed += ctx => motor.Jump();
-        
     }
 
-    void FixedUpdate()
+    private void FixedUpdate()
     {
         motor.ProcessMove(onFoot.Movement.ReadValue<Vector2>());
-
     }
 
     private void LateUpdate()
@@ -32,13 +30,13 @@ public class InputManager : MonoBehaviour
         look.ProcessLook(onFoot.Look.ReadValue<Vector2>());
     }
 
-    void OnEnable()
+    private void OnEnable()
     {
-        onFoot.Enable();
+        playerInput.Enable();
     }
 
-    void OnDisable()
+    private void OnDisable()
     {
-        onFoot.Disable();
+        playerInput.Disable();
     }
 }

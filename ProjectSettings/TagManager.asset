@@ -5,14 +5,15 @@ TagManager:
   serializedVersion: 2
   tags:
   - Door
+  - Ground
   layers:
   - Default
   - TransparentFX
   - Ignore Raycast
-  - 
+  - Ground
   - Water
   - UI
-  - 
+  - Interactable
   - 
   - 
   - 
