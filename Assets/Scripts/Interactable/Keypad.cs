@@ -25,4 +25,3 @@ public class Keypad : Interactable
         door.GetComponent<Animator>().SetBool("IsOpen", doorOpen);
     }
 }
- 
